@@ -7,6 +7,10 @@ from PIL import Image, ImageTk, ImageDraw  # Para redimensionar las imágenes
 import os
 
 os.chdir(r"C:/Users/fsalinas/Downloads/AVANCE PAVIMENTO RIGIDO ASSHTO Y MTC")
+current_dir = os.path.dirname(__file__)
+formula_path = os.path.join(current_dir, "FORMULA.png")
+variables_path = os.path.join(current_dir, "DESCRIPCION.png")
+image_path = os.path.join(current_dir, "Cuadro Pavimento MTC.png")
 
 
 def aashto_equation(D, W82, Zr, So, delta_PSI, Pt, Mr, Cd, J, Ec, k):
@@ -79,7 +83,7 @@ def create_input_with_description(root, label_text, description_text, row):
 def open_formula_window():
     formula_window = tk.Toplevel(root)
     formula_window.title("Fórmula AASHTO")
-    formula_original = Image.open(r"C:/Users/fsalinas/Downloads/AVANCE PAVIMENTO RIGIDO ASSHTO Y MTC/MTC PAVIMENTO RIGIDO/PROGRAMA PAV. RIGIDO CALCULO POR MTC/FORMULA.png")
+    formula_original = Image.open(formula_path)
     formula_image = ImageTk.PhotoImage(formula_original)
     formula_label = tk.Label(formula_window, image=formula_image)
     formula_label.image = formula_image
@@ -88,7 +92,7 @@ def open_formula_window():
 def open_variables_window():
     variables_window = tk.Toplevel(root)
     variables_window.title("Variables de la Fórmula")
-    variables_original = Image.open(r"C:/Users/fsalinas/Downloads/AVANCE PAVIMENTO RIGIDO ASSHTO Y MTC/DESCRIPCION.png")
+    variables_original = Image.open(variables_path)
     variables_image = ImageTk.PhotoImage(variables_original)
     variables_label = tk.Label(variables_window, image=variables_image)
     variables_label.image = variables_image
@@ -100,7 +104,7 @@ class ArrowDrawingApp:
         self.root = root
         try:
             # Cargar la imagen desde la ruta especificada
-            self.image = Image.open(image_path,r"Cuadro Pavimento MTC")
+            self.image = Image.open(image_path)
             self.draw = ImageDraw.Draw(self.image)
         except FileNotFoundError:
             messagebox.showerror("Error", f"No se encontró la imagen: {image_path}")
@@ -168,8 +172,6 @@ def main():
     root = tk.Tk()
     root.title("Aplicación de Dibujo de Flechas")
 
-    # Especificar la ruta de la imagen a cargar automáticamente
-    image_path = r"C:/Users/fsalinas/Downloads/AVANCE PAVIMENTO RIGIDO ASSHTO Y MTC/Cuadro Pavimento MTC.png"  # Cambia a la ruta deseada si no está en el mismo directorio
 
     # Inicializar la aplicación
     try:
@@ -185,7 +187,7 @@ def check_image_path(ruta_imagen):
         return False
     return True
 
-ruta_imagen = r"C:/Users/fsalinas/Downloads/AVANCE PAVIMENTO RIGIDO ASSHTO Y MTC/Cuadro Pavimento MTC.png"
+ruta_imagen = "C:/Users/fsalinas/Downloads/AVANCE PAVIMENTO RIGIDO ASSHTO Y MTC/Cuadro Pavimento MTC.png"
 if check_image_path(ruta_imagen):
     main()
 
